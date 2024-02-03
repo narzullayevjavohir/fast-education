@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
-
-const sideItems = ref([
+const sideItems = [
   {
     title: "Dashboard",
     image: "/sidebar-images/home.svg",
@@ -54,24 +52,24 @@ const sideItems = ref([
     title: "Settings",
     image: "/public/sidebar-images/setting.svg",
   },
-]);
+];
 
-const isActive = ref(false);
+// const isActive = ref(false);
 
-const onClickIndex = (item: string) => {
-  const items = sideItems.value.map((val) => {
-    if (val.title !== item) {
-      return val;
-    } else {
-      return {
-        ...val,
-        active: true,
-      };
-    }
-  });
-  sideItems.value = [...items];
-  console.log(sideItems.value);
-};
+// const onClickIndex = (item: string) => {
+//   const items = sideItems.value.map((val) => {
+//     if (val.title !== item) {
+//       return val;
+//     } else {
+//       return {
+//         ...val,
+//         active: true,
+//       };
+//     }
+//   });
+//   sideItems.value = [...items];
+//   console.log(sideItems.value);
+// };
 </script>
 
 <template>
@@ -86,21 +84,29 @@ const onClickIndex = (item: string) => {
       </div>
     </div>
     <div class="border-b mx-auto w-[90%] mt-5 border-slate-600 mb-3"></div>
-    <ul v-for="item in sideItems" :key="item.title" class="w-[90%] mx-auto">
+    <a-row :gutter="[16, 16]">
+      <a-col span="24" v-for="item in sideItems">
+        <a-space>
+          <s-icon name="close" />
+          <h2>{{ item.title }}</h2>
+        </a-space>
+      </a-col>
+    </a-row>
+    <!-- <ul v-for="item in sideItems" :key="item.title" class="w-[90%] mx-auto">
       <li
-        @click="() => onClickIndex(item.title)"
         class="text-white flex items-center py-3 gap-x-3 pl-4 rounded-xl cursor-pointer"
         :class="item?.active ? 'bg-white text-[#121111]' : ''"
       >
+        
         <img
           :src="item.image"
           :alt="item.title"
           class="w-6 h-6"
           :class="item?.active ? 'text-red-500' : ''"
-        />
-        <h2>{{ item.title }}</h2>
+        /> 
+       
       </li>
-    </ul>
+    </ul> -->
     <button
       class="text-white absolute bottom-4 left-[50%] -translate-x-[50%] bg-lime-500 w-[90%] py-3 rounded-lg"
     >
